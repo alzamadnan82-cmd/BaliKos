@@ -1,7 +1,17 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search, MapPin, Star, ShieldCheck, Zap, Coffee, Wifi, User } from 'lucide-react';
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Assuming the search page can handle query parameters in the future
+    navigate('/search');
+  };
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -23,23 +33,25 @@ export default function Home() {
           </p>
           
           {/* Search Bar */}
-          <div className="max-w-3xl mx-auto bg-white rounded-full p-2 flex shadow-xl">
+          <form onSubmit={handleSearch} className="max-w-3xl mx-auto bg-white rounded-full p-2 flex shadow-xl">
             <div className="flex-grow flex items-center px-4">
               <MapPin className="h-5 w-5 text-slate-400 mr-2" />
               <input 
                 type="text" 
                 placeholder="Cari berdasarkan kampus, area, atau nama kos..." 
                 className="w-full text-slate-900 focus:outline-none bg-transparent"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <Link 
-              to="/search" 
+            <button 
+              type="submit" 
               className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-medium transition-colors flex items-center gap-2"
             >
               <Search className="h-5 w-5" />
               Cari
-            </Link>
-          </div>
+            </button>
+          </form>
         </div>
       </section>
 
@@ -163,7 +175,7 @@ export default function Home() {
       {/* How it works */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-slate-900">Cara Kerja BaliKos</h2>
+          <h2 className="text-3xl font-bold text-slate-900">Cara Kerja Kos id</h2>
           <p className="text-slate-500 mt-4 max-w-2xl mx-auto">Pengalaman mulus bagi mahasiswa yang mencari tempat tinggal dan pemilik yang mengelola properti mereka.</p>
         </div>
 

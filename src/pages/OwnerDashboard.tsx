@@ -65,7 +65,10 @@ export default function OwnerDashboard() {
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <h1 className="text-2xl font-bold text-slate-900">Dasbor Pemilik</h1>
-              <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors flex items-center gap-2">
+              <button 
+                onClick={() => alert("Membuka form penambahan kamar...")}
+                className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors flex items-center gap-2"
+              >
                 <Plus className="h-4 w-4" /> Tambah Kamar Baru
               </button>
             </div>
@@ -106,14 +109,14 @@ export default function OwnerDashboard() {
                       <p className="font-bold text-slate-900 text-sm">Kamar 102 - Andi</p>
                       <p className="text-xs text-red-600">Menunggak 5 hari (Rp 1.5Jt)</p>
                     </div>
-                    <button className="text-xs bg-white border border-slate-300 px-3 py-1.5 rounded hover:bg-slate-50 font-medium">Ingatkan</button>
+                    <button onClick={() => alert("Mengirim pesan pengingat tagihan ke Andi...")} className="text-xs bg-white border border-slate-300 px-3 py-1.5 rounded hover:bg-slate-50 font-medium">Ingatkan</button>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-100">
                     <div>
                       <p className="font-bold text-slate-900 text-sm">Kamar 205 - Siti</p>
                       <p className="text-xs text-red-600">Menunggak 2 hari (Rp 1.5Jt)</p>
                     </div>
-                    <button className="text-xs bg-white border border-slate-300 px-3 py-1.5 rounded hover:bg-slate-50 font-medium">Ingatkan</button>
+                    <button onClick={() => alert("Mengirim pesan pengingat tagihan ke Siti...")} className="text-xs bg-white border border-slate-300 px-3 py-1.5 rounded hover:bg-slate-50 font-medium">Ingatkan</button>
                   </div>
                 </div>
               </div>
@@ -146,7 +149,10 @@ export default function OwnerDashboard() {
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <h1 className="text-2xl font-bold text-slate-900">Sistem Daftar Hitam Penyewa</h1>
-              <button className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors flex items-center gap-2">
+              <button 
+                onClick={() => alert("Membuka form laporan penyewa masuk daftar hitam...")}
+                className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors flex items-center gap-2"
+              >
                 <ShieldAlert className="h-4 w-4" /> Laporkan Penyewa
               </button>
             </div>
@@ -164,7 +170,10 @@ export default function OwnerDashboard() {
                     className="w-full py-2 text-slate-900 focus:outline-none bg-transparent text-sm"
                   />
                 </div>
-                <button className="bg-slate-900 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+                <button 
+                  onClick={() => alert("Sedang mencari di database...")}
+                  className="bg-slate-900 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors"
+                >
                   Periksa Database
                 </button>
               </div>

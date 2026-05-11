@@ -9,7 +9,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2">
               <Home className="h-6 w-6 text-indigo-600" />
-              <span className="font-bold text-xl tracking-tight text-slate-900">BaliKos</span>
+              <span className="font-bold text-xl tracking-tight text-slate-900">Kos id</span>
             </Link>
           </div>
           <div className="flex items-center gap-6">

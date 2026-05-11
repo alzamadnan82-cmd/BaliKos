@@ -114,10 +114,16 @@ export default function KosDetail() {
             </div>
 
             <div className="space-y-4">
-              <button className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2">
+              <button 
+                onClick={() => alert("Membuka chat WhatsApp dengan pemilik...")}
+                className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
+              >
                 <MessageCircle className="h-5 w-5" /> Chat Pemilik
               </button>
-              <button className="w-full bg-white text-indigo-600 border border-indigo-200 py-3 rounded-xl font-bold hover:bg-indigo-50 transition-colors flex items-center justify-center gap-2">
+              <button 
+                onClick={() => alert("Membuka form pengajuan kunjungan...")}
+                className="w-full bg-white text-indigo-600 border border-indigo-200 py-3 rounded-xl font-bold hover:bg-indigo-50 transition-colors flex items-center justify-center gap-2"
+              >
                 <Calendar className="h-5 w-5" /> Ajukan Kunjungan
               </button>
             </div>

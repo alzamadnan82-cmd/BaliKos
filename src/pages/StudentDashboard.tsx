@@ -84,10 +84,16 @@ export default function StudentDashboard() {
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
+                    <button 
+                      onClick={() => alert("Mengalihkan ke halaman pembayaran...")}
+                      className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
+                    >
                       Bayar Sewa
                     </button>
-                    <button className="bg-white text-slate-700 border border-slate-300 px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors">
+                    <button 
+                      onClick={() => alert("Membuka chat WhatsApp dengan pemilik...")}
+                      className="bg-white text-slate-700 border border-slate-300 px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
+                    >
                       Hubungi Pemilik
                     </button>
                   </div>
