@@ -171,13 +171,154 @@ export default function StudentDashboard() {
           </div>
         )}
 
-        {/* Other tabs can be implemented similarly */}
-        {['messages', 'history', 'settings'].includes(activeTab) && (
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-12 text-center">
-            <h2 className="text-xl font-bold text-slate-900 mb-2 capitalize">
-              {activeTab === 'messages' ? 'Pesan' : activeTab === 'history' ? 'Riwayat' : 'Pengaturan'}
-            </h2>
-            <p className="text-slate-500">Bagian ini adalah bagian dari prototipe dan akan diimplementasikan sepenuhnya pada fase berikutnya.</p>
+        {/* Messages Tab */}
+        {activeTab === 'messages' && (
+          <div className="space-y-6 h-[80vh] flex flex-col">
+            <h1 className="text-2xl font-bold text-slate-900">Pesan</h1>
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex-grow flex">
+              {/* Chat List */}
+              <div className="w-1/3 border-r border-slate-200 flex flex-col">
+                <div className="p-4 border-b border-slate-100 font-bold text-sm text-slate-900">Obrolan Aktif</div>
+                <div className="overflow-y-auto flex-grow">
+                  <div className="p-4 border-b border-slate-100 bg-slate-50 cursor-pointer flex gap-3 items-center">
+                    <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">W</div>
+                    <div>
+                      <p className="font-bold text-sm text-slate-900">Bapak Wayan</p>
+                      <p className="text-xs text-slate-500 truncate w-32">Iya, besok teknisi AC akan datang...</p>
+                    </div>
+                  </div>
+                  <div className="p-4 border-b border-slate-100 cursor-pointer flex gap-3 items-center hover:bg-slate-50">
+                    <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">S</div>
+                    <div>
+                      <p className="font-bold text-sm text-slate-900">Ibu Sri (Admin)</p>
+                      <p className="text-xs text-slate-500 truncate w-32">Tolong lengkapi data diri ya mas...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Chat View */}
+              <div className="w-2/3 flex flex-col">
+                <div className="p-4 border-b border-slate-100 font-bold text-slate-900 flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs">W</div>
+                  Bapak Wayan (Pemilik Kos)
+                </div>
+                <div className="flex-grow p-4 overflow-y-auto bg-slate-50 flex flex-col gap-4">
+                  <div className="self-start bg-white p-3 rounded-lg rounded-tl-none border border-slate-200 text-sm max-w-[80%] shadow-sm">
+                    Halo Budi, untuk AC kamar 104 besok akan ada teknisi yang datang untuk service rutin ya sekitar jam 10 pagi.
+                    <span className="block text-[10px] text-slate-400 mt-1">Kemarin 14:20</span>
+                  </div>
+                  <div className="self-end bg-indigo-600 text-white p-3 rounded-lg rounded-tr-none text-sm max-w-[80%] shadow-sm">
+                    Baik Pak Wayan. Besok saya ada kelas pagi, kuncinya saya titip di bawah atau gimana ya Pak?
+                    <span className="block text-[10px] text-indigo-200 mt-1 text-right">Kemarin 15:00</span>
+                  </div>
+                  <div className="self-start bg-white p-3 rounded-lg rounded-tl-none border border-slate-200 text-sm max-w-[80%] shadow-sm">
+                    Titip di satpam saja mas kuncinya, nanti saya temani teknisinya.
+                    <span className="block text-[10px] text-slate-400 mt-1">Hari ini 08:15</span>
+                  </div>
+                </div>
+                <div className="p-4 border-t border-slate-200 bg-white">
+                  <div className="flex gap-2">
+                    <input type="text" placeholder="Ketik pesan..." className="flex-grow border border-slate-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    <button className="bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Kirim</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* History & Saved Tab */}
+        {activeTab === 'history' && (
+          <div className="space-y-6">
+            <h1 className="text-2xl font-bold text-slate-900">Tersimpan & Riwayat</h1>
+            
+            <h2 className="text-lg font-bold text-slate-900 mt-8 mb-4">Kos Tersimpan (Wishlist)</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[2, 4].map(id => (
+                <div key={id} className="bg-white rounded-xl shadow-sm border border-slate-200 flex overflow-hidden">
+                  <img src={`https://picsum.photos/seed/kos${id + 10}/200/200`} alt="Kos" className="w-1/3 object-cover" />
+                  <div className="p-4 w-2/3 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-bold text-slate-900 line-clamp-1">Kos Eksklusif Bangka {id}</h3>
+                      <p className="text-xs text-slate-500 mb-2">Balunijuk, dekat kampus UBB</p>
+                    </div>
+                    <div className="flex justify-between items-end">
+                      <span className="text-indigo-600 font-bold text-sm">Rp {(1.2 + id * 0.1).toFixed(1)}Jt/bln</span>
+                      <button className="text-xs font-medium text-red-500 hover:underline">Hapus</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <h2 className="text-lg font-bold text-slate-900 mt-8 mb-4">Riwayat Sewa Sebelumnya</h2>
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-slate-50 text-slate-500">
+                  <tr>
+                    <th className="p-4 font-medium rounded-tl-lg">Nama Kos</th>
+                    <th className="p-4 font-medium">Periode Sewa</th>
+                    <th className="p-4 font-medium">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  <tr>
+                    <td className="p-4 font-medium text-slate-900">Kos Mawar Putra</td>
+                    <td className="p-4 text-slate-500">Jan 2025 - Des 2025</td>
+                    <td className="p-4"><span className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-bold">Selesai</span></td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-medium text-slate-900">Kos Melati Indah</td>
+                    <td className="p-4 text-slate-500">Agustus 2024 - Des 2024</td>
+                    <td className="p-4"><span className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-bold">Selesai</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Settings Tab */}
+        {activeTab === 'settings' && (
+          <div className="space-y-6">
+            <h1 className="text-2xl font-bold text-slate-900">Pengaturan Profil</h1>
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+              <form className="max-w-2xl space-y-6" onSubmit={(e) => { e.preventDefault(); alert('Profil berhasil diperbarui!'); }}>
+                {/* Photo Update */}
+                <div className="flex items-center gap-6 pb-6 border-b border-slate-100">
+                  <img src="https://picsum.photos/seed/student/100/100" alt="Avatar" className="w-20 h-20 rounded-full object-cover shadow-sm" />
+                  <div>
+                    <button type="button" className="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-100 transition-colors mb-1">Ubah Foto</button>
+                    <p className="text-xs text-slate-500">JPG, GIF, atau PNG. Maksimal 2MB.</p>
+                  </div>
+                </div>
+                
+                {/* Inputs */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap</label>
+                    <input type="text" defaultValue="Budi Santoso" className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                    <input type="email" defaultValue="budi.santoso@mhs.ubb.ac.id" className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-slate-50" readOnly />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Nomor Telepon</label>
+                    <input type="text" defaultValue="081234567890" className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Universitas</label>
+                    <input type="text" defaultValue="Universitas Bangka Belitung" className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-slate-100 flex justify-end gap-3">
+                  <button type="button" className="px-6 py-2 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50">Batal</button>
+                  <button type="submit" className="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700">Simpan Perubahan</button>
+                </div>
+              </form>
+            </div>
           </div>
         )}
       </main>
