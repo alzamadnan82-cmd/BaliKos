@@ -7,10 +7,10 @@ export default function KosDetail() {
   const [activeImage, setActiveImage] = useState(0);
   
   const images = [
-    `https://picsum.photos/seed/kos${id}_1/800/600`,
-    `https://picsum.photos/seed/kos${id}_2/800/600`,
-    `https://picsum.photos/seed/kos${id}_3/800/600`,
-    `https://picsum.photos/seed/kos${id}_4/800/600`,
+    "https://jituproperty.com/api/photos/blog/500/424/7c770f763efe2a76a3ea12dfd52fba5e.jpg?w=800&q=80",
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhuklVWLnzN_LKIXhOtYTU7z_V1e9gxxrbHKRFx8pT9fbuAYncTfuyUwGlGfXNMAj9xms5M8BDtBOzqjjbraRL9FMJofekt8_a11oGtSW_G2UjqSd3OHUttdzmLRVqS-83N6ZD1XKGCxLRvwVjsQjC20SgFSDvyLp0_7-bpNK5RG7IBi9aCq6-kVWm-y5s/s960/Cara-Memulai-Bisnis-Kos-Kosan.jpg?w=800&q=80",
+    "https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&q=80",
+    "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80",
   ];
 
   return (
@@ -106,7 +106,7 @@ export default function KosDetail() {
             <h3 className="text-lg font-bold text-slate-900 mb-4">Tertarik menyewa?</h3>
             
             <div className="flex items-center gap-4 mb-6 p-4 bg-slate-50 rounded-xl border border-slate-100">
-              <img src="https://picsum.photos/seed/owner/100/100" alt="Pemilik" className="w-12 h-12 rounded-full object-cover" referrerPolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&q=80" alt="Pemilik" className="w-12 h-12 rounded-full object-cover" referrerPolicy="no-referrer" />
               <div>
                 <p className="font-bold text-slate-900 text-sm">Bapak Wayan</p>
                 <p className="text-xs text-slate-500">Pemilik Kos - Terverifikasi</p>

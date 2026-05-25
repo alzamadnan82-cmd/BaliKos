@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { Home, CreditCard, History, Settings, Bell, MessageSquare } from 'lucide-react';
 
+const WISHLIST_KOS = [
+  { id: 2, name: "Kos Eksklusif Bangka 2", image: "https://images.unsplash.com/photo-1502672260266-1c1de2d96674?w=200&q=80", price: "1.4" },
+  { id: 4, name: "Kos Eksklusif Bangka 4", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=200&q=80", price: "1.6" },
+];
+
 export default function StudentDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
 
@@ -10,7 +15,7 @@ export default function StudentDashboard() {
       <aside className="w-full md:w-64 flex-shrink-0">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden sticky top-24">
           <div className="p-6 border-b border-slate-100 flex items-center gap-4">
-            <img src="https://picsum.photos/seed/student/100/100" alt="Mahasiswa" className="w-12 h-12 rounded-full object-cover" referrerPolicy="no-referrer" />
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&q=80" alt="Mahasiswa" className="w-12 h-12 rounded-full object-cover" referrerPolicy="no-referrer" />
             <div>
               <h2 className="font-bold text-slate-900">Budi Santoso</h2>
               <p className="text-xs text-slate-500">Universitas Bangka Belitung</p>
@@ -62,7 +67,7 @@ export default function StudentDashboard() {
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
               <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-1/3 h-48 md:h-auto">
-                  <img src="https://picsum.photos/seed/mykos/600/400" alt="Kos Saya" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80" alt="Kos Saya" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </div>
                 <div className="p-6 flex-grow flex flex-col justify-between">
                   <div>
@@ -234,16 +239,16 @@ export default function StudentDashboard() {
             
             <h2 className="text-lg font-bold text-slate-900 mt-8 mb-4">Kos Tersimpan (Wishlist)</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[2, 4].map(id => (
-                <div key={id} className="bg-white rounded-xl shadow-sm border border-slate-200 flex overflow-hidden">
-                  <img src={`https://picsum.photos/seed/kos${id + 10}/200/200`} alt="Kos" className="w-1/3 object-cover" />
+              {WISHLIST_KOS.map(kos => (
+                <div key={kos.id} className="bg-white rounded-xl shadow-sm border border-slate-200 flex overflow-hidden">
+                  <img src={kos.image} alt="Kos" className="w-1/3 object-cover" referrerPolicy="no-referrer" />
                   <div className="p-4 w-2/3 flex flex-col justify-between">
                     <div>
-                      <h3 className="font-bold text-slate-900 line-clamp-1">Kos Eksklusif Bangka {id}</h3>
+                      <h3 className="font-bold text-slate-900 line-clamp-1">{kos.name}</h3>
                       <p className="text-xs text-slate-500 mb-2">Balunijuk, dekat kampus UBB</p>
                     </div>
                     <div className="flex justify-between items-end">
-                      <span className="text-indigo-600 font-bold text-sm">Rp {(1.2 + id * 0.1).toFixed(1)}Jt/bln</span>
+                      <span className="text-indigo-600 font-bold text-sm">Rp {kos.price}Jt/bln</span>
                       <button className="text-xs font-medium text-red-500 hover:underline">Hapus</button>
                     </div>
                   </div>
@@ -286,7 +291,7 @@ export default function StudentDashboard() {
               <form className="max-w-2xl space-y-6" onSubmit={(e) => { e.preventDefault(); alert('Profil berhasil diperbarui!'); }}>
                 {/* Photo Update */}
                 <div className="flex items-center gap-6 pb-6 border-b border-slate-100">
-                  <img src="https://picsum.photos/seed/student/100/100" alt="Avatar" className="w-20 h-20 rounded-full object-cover shadow-sm" />
+                  <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&q=80" alt="Avatar" className="w-20 h-20 rounded-full object-cover shadow-sm" referrerPolicy="no-referrer" />
                   <div>
                     <button type="button" className="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-100 transition-colors mb-1">Ubah Foto</button>
                     <p className="text-xs text-slate-500">JPG, GIF, atau PNG. Maksimal 2MB.</p>

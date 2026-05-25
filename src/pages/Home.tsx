@@ -2,6 +2,13 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, MapPin, Star, ShieldCheck, Zap, Coffee, Wifi, User } from 'lucide-react';
 
+const RECOMMENDED_KOS = [
+  { id: 1, name: "Kos Lean", image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizF8DaHKHWDYChAxL86B0UXHgN1ridN2J9BBw3CiNTcjSJ75DJlo3syAUl5DpHbaZwuwcEf3JYosXPh3VVlyOKaZMQb-BIB-Pc1EMk8V6lOnYS6KUHPOnPEglnkScQub40mYM1DIlpqYDi/s1600/desain-kamar-kost.jpg?w=600&q=80", price: "1.5Jt", distance: "5 menit ke kampus", rating: 4.8 },
+  { id: 2, name: "Kos Adelia", image: "https://sgp1.digitaloceanspaces.com/www.sewakost.com-69925f5b4547e/listings/04-2018/ad18361/kost-mahasiswa-putra-918998770_large.JPG?w=600&q=80", price: "1.2Jt", distance: "10 menit ke kampus", rating: 4.7 },
+  { id: 3, name: "Kos Graha 8", image: "https://www.umn.ac.id/wp-content/uploads/2022/09/Kamar-Kos.jpg?w=600&q=80", price: "1.4Jt", distance: "7 menit ke kampus", rating: 4.9 },
+  { id: 4, name: "Kos Reni", image: "https://rencanamu.id/assets/file_uploaded/blog/1469719595-c360-2011-.jpg?w=600&q=80", price: "1.3Jt", distance: "5 menit ke kampus", rating: 4.6 },
+];
+
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
@@ -66,11 +73,11 @@ export default function Home() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((i) => (
-            <Link to={`/kos/${i}`} key={i} className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-100">
+          {RECOMMENDED_KOS.map((kos) => (
+            <Link to={`/kos/${kos.id}`} key={kos.id} className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-100">
               <div className="relative h-48 overflow-hidden flex-shrink-0">
                 <img 
-                  src={`https://picsum.photos/seed/house${i}/600/400`} 
+                  src={kos.image} 
                   alt="Kamar Kos" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   referrerPolicy="no-referrer"
@@ -79,21 +86,21 @@ export default function Home() {
                   Tersedia
                 </div>
                 <div className="absolute top-3 right-3 bg-indigo-600 text-white px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
-                  <Star className="h-3 w-3 text-yellow-400 fill-current" /> 4.8
+                  <Star className="h-3 w-3 text-yellow-400 fill-current" /> {kos.rating.toFixed(1)}
                 </div>
               </div>
               <div className="p-4 flex flex-col flex-grow">
                 <div className="flex items-center gap-1 text-slate-500 text-xs mb-2">
-                  <MapPin className="h-3 w-3" /> Balunijuk, 5 menit ke kampus
+                  <MapPin className="h-3 w-3" /> Balunijuk, {kos.distance}
                 </div>
-                <h3 className="font-bold text-slate-900 mb-1 line-clamp-1">Kos Eksklusif Bangka {i}</h3>
+                <h3 className="font-bold text-slate-900 mb-1 line-clamp-1">{kos.name}</h3>
                 <div className="flex items-center gap-2 text-slate-500 text-xs mb-3">
                   <span className="flex items-center gap-1"><Wifi className="h-3 w-3"/> WiFi</span>
                   <span className="flex items-center gap-1"><Zap className="h-3 w-3"/> AC</span>
                 </div>
                 <div className="flex items-end justify-between mt-auto pt-4">
                   <div>
-                    <span className="text-lg font-bold text-indigo-600">Rp 1.5Jt</span>
+                    <span className="text-lg font-bold text-indigo-600">Rp {kos.price}</span>
                     <span className="text-xs text-slate-500">/bulan</span>
                   </div>
                 </div>

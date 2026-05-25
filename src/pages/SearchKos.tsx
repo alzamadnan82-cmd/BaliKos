@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { Search, MapPin, Filter, Star, Wifi, Zap, Car } from 'lucide-react';
 
 const MOCK_KOS = [
-  { id: 1, name: "Kos Eksklusif Bangka 1", price: 1500000, distance: 1, gender: "campur", facilities: ["WiFi", "AC", "Parkir", "Kamar Mandi Dalam"], rating: 4.8, available: true },
-  { id: 2, name: "Kos Mawar Putra", price: 800000, distance: 3, gender: "putra", facilities: ["WiFi", "Parkir"], rating: 4.2, available: true },
-  { id: 3, name: "Kos Melati Putri", price: 1000000, distance: 2, gender: "putri", facilities: ["WiFi", "Kamar Mandi Dalam", "Parkir"], rating: 4.5, available: false },
-  { id: 4, name: "Kos Kencana 4", price: 2000000, distance: 0.5, gender: "campur", facilities: ["WiFi", "AC", "Parkir", "Kamar Mandi Dalam"], rating: 4.9, available: true },
-  { id: 5, name: "Kos Berkah", price: 600000, distance: 4, gender: "putra", facilities: ["Parkir"], rating: 3.8, available: true },
-  { id: 6, name: "Kos Bintang Putri", price: 1200000, distance: 1.5, gender: "putri", facilities: ["WiFi", "AC"], rating: 4.4, available: true },
+  { id: 1, name: "Kos Griya Putri", price: 1500000, distance: 1, gender: "campur", facilities: ["WiFi", "AC", "Parkir", "Kamar Mandi Dalam"], rating: 4.8, available: true, image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80" },
+  { id: 2, name: "Kos Bintang Dormitory", price: 800000, distance: 3, gender: "putra", facilities: ["WiFi", "Parkir"], rating: 4.2, available: true, image: "https://kostmurah.dipalembang.info/wp-content/uploads/2023/10/KOST-MAHASISWA-MURAH-DI-PALEMBANG-700x525.jpeg?w=600&q=80" },
+  { id: 3, name: "Kos Pelangi Jaya", price: 1000000, distance: 2, gender: "putri", facilities: ["WiFi", "Kamar Mandi Dalam", "Parkir"], rating: 4.5, available: false, image: "https://www.erakini.id/images/post/16_9/bisnis-kos-kosan-570x300_1716542662.webp?w=600&q=80" },
+  { id: 4, name: "Kos Galeyo", price: 2000000, distance: 0.5, gender: "campur", facilities: ["WiFi", "AC", "Parkir", "Kamar Mandi Dalam"], rating: 4.9, available: true, image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80" },
+  { id: 5, name: "Kos Zam Zam", price: 600000, distance: 4, gender: "putra", facilities: ["Parkir"], rating: 3.8, available: true, image: "https://rbtv.disway.id/upload/9b212a48bcc7b0507406aa85a24f59ff.jpg?w=600&q=80" },
+  { id: 6, name: "Kos Keriwil", price: 1200000, distance: 1.5, gender: "putri", facilities: ["WiFi", "AC"], rating: 4.4, available: true, image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizF8DaHKHWDYChAxL86B0UXHgN1ridN2J9BBw3CiNTcjSJ75DJlo3syAUl5DpHbaZwuwcEf3JYosXPh3VVlyOKaZMQb-BIB-Pc1EMk8V6lOnYS6KUHPOnPEglnkScQub40mYM1DIlpqYDi/s640/desain-kamar-kost.jpg?w=600&q=80" },
 ];
 
 export default function SearchKos() {
@@ -185,7 +185,7 @@ export default function SearchKos() {
               <Link to={`/kos/${kos.id}`} key={kos.id} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-100 flex flex-col">
                 <div className="relative h-48 overflow-hidden flex-shrink-0">
                   <img 
-                    src={`https://picsum.photos/seed/kos${kos.id+10}/600/400`} 
+                    src={kos.image} 
                     alt="Kamar Kos" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     referrerPolicy="no-referrer"
