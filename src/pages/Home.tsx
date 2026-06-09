@@ -1,6 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, MapPin, Star, ShieldCheck, Zap, Coffee, Wifi, User } from 'lucide-react';
+import { Search, MapPin, Star, ShieldCheck, Zap, Wifi, User } from 'lucide-react';
+
+import { getPromos } from '../services/promoService';
+
+interface Promo {
+  id: number;
+  title: string;
+  description: string;
+  image_url: string;
+  badge_text: string;
+  badge_color: string;
+  link_url: string;
+}
 
 const RECOMMENDED_KOS = [
   { id: 1, name: "Kos Lean", image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizF8DaHKHWDYChAxL86B0UXHgN1ridN2J9BBw3CiNTcjSJ75DJlo3syAUl5DpHbaZwuwcEf3JYosXPh3VVlyOKaZMQb-BIB-Pc1EMk8V6lOnYS6KUHPOnPEglnkScQub40mYM1DIlpqYDi/s1600/desain-kamar-kost.jpg?w=600&q=80", price: "1.5Jt", distance: "5 menit ke kampus", rating: 4.8 },
@@ -10,12 +22,39 @@ const RECOMMENDED_KOS = [
 ];
 
 export default function Home() {
+
   const [searchQuery, setSearchQuery] = useState('');
+
+  const [promos, setPromos] = useState<Promo[]>([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+
+    const fetchPromos = async () => {
+
+      try {
+
+        const data = await getPromos();
+
+        console.log("PROMO DARI API:", data);
+
+        setPromos(data);
+
+      } catch (error) {
+
+        console.error(error);
+
+      }
+
+    };
+
+    fetchPromos();
+
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // Assuming the search page can handle query parameters in the future
     navigate('/search');
   };
 
@@ -24,9 +63,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative bg-indigo-900 text-white py-24 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <img 
-            src="https://sanggahan.files.wordpress.com/2022/06/ubb.jpg" 
-            alt="Kampus Universitas" 
+          <img
+            src="https://sanggahan.files.wordpress.com/2022/06/ubb.jpg"
+            alt="Kampus Universitas"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
@@ -38,21 +77,21 @@ export default function Home() {
           <p className="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
             Cara termudah bagi mahasiswa untuk menemukan kos dan bagi pemilik untuk mengelola properti mereka dengan lancar.
           </p>
-          
+
           {/* Search Bar */}
           <form onSubmit={handleSearch} className="max-w-3xl mx-auto bg-white rounded-full p-2 flex shadow-xl">
             <div className="flex-grow flex items-center px-4">
               <MapPin className="h-5 w-5 text-slate-400 mr-2" />
-              <input 
-                type="text" 
-                placeholder="Cari berdasarkan kampus, area, atau nama kos..." 
+              <input
+                type="text"
+                placeholder="Cari berdasarkan kampus, area, atau nama kos..."
                 className="w-full text-slate-900 focus:outline-none bg-transparent"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-medium transition-colors flex items-center gap-2"
             >
               <Search className="h-5 w-5" />
@@ -71,14 +110,14 @@ export default function Home() {
           </div>
           <Link to="/search" className="text-indigo-600 font-medium hover:underline">Lihat semua</Link>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {RECOMMENDED_KOS.map((kos) => (
             <Link to={`/kos/${kos.id}`} key={kos.id} className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-100">
               <div className="relative h-48 overflow-hidden flex-shrink-0">
-                <img 
-                  src={kos.image} 
-                  alt="Kamar Kos" 
+                <img
+                  src={kos.image}
+                  alt="Kamar Kos"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   referrerPolicy="no-referrer"
                 />
@@ -95,8 +134,8 @@ export default function Home() {
                 </div>
                 <h3 className="font-bold text-slate-900 mb-1 line-clamp-1">{kos.name}</h3>
                 <div className="flex items-center gap-2 text-slate-500 text-xs mb-3">
-                  <span className="flex items-center gap-1"><Wifi className="h-3 w-3"/> WiFi</span>
-                  <span className="flex items-center gap-1"><Zap className="h-3 w-3"/> AC</span>
+                  <span className="flex items-center gap-1"><Wifi className="h-3 w-3" /> WiFi</span>
+                  <span className="flex items-center gap-1"><Zap className="h-3 w-3" /> AC</span>
                 </div>
                 <div className="flex items-end justify-between mt-auto pt-4">
                   <div>
@@ -120,61 +159,52 @@ export default function Home() {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Ad 1 */}
-            <a href="#" className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-200 group block">
-              <div className="h-40 overflow-hidden relative">
-                <img src="https://hips.hearstapps.com/hmg-prod/images/washing-cycle-preparation-at-home-royalty-free-image-1736274935.pjpeg?crop=1xw:0.84415xh;center,top&resize=1200:*/600/400" alt="Laundry" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" referrerPolicy="no-referrer" />
-                <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md shadow-sm">
-                  Diskon 20%
-                </div>
-              </div>
-              <div className="p-4">
-                <h4 className="font-bold text-slate-900 mb-1">Laundry Kilat Bersih</h4>
-                <p className="text-sm text-slate-500 line-clamp-2">Khusus mahasiswa! Cuci setrika selesai 24 jam, gratis antar jemput area kos.</p>
-              </div>
-            </a>
-            
-            {/* Ad 2 */}
-            <a href="#" className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-200 group block">
-              <div className="h-40 overflow-hidden relative">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.M6J5Q-lUA_Ij_mmTNUW58AHaHa?rs=1&pid=ImgDetMain&o=7&rm=3/600/400" alt="Sewa Motor" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" referrerPolicy="no-referrer" />
-                <div className="absolute top-3 left-3 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-md shadow-sm">
-                  Harga Spesial
-                </div>
-              </div>
-              <div className="p-4">
-                <h4 className="font-bold text-slate-900 mb-1">Sewa Motor Bulanan</h4>
-                <p className="text-sm text-slate-500 line-clamp-2">Mulai dari Rp 500rb/bulan. Unit terawat, gratis servis rutin dan helm.</p>
-              </div>
-            </a>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-            {/* Ad 3 */}
-            <a href="#" className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-200 group block">
-              <div className="h-40 overflow-hidden relative">
-                <img src="https://tse1.mm.bing.net/th/id/OIP.nna39nLBH-Gl7RJSTD73IAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3/600/400" alt="Kafe" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" referrerPolicy="no-referrer" />
-                <div className="absolute top-3 left-3 bg-emerald-500 text-white text-xs font-bold px-2 py-1 rounded-md shadow-sm">
-                  Beli 1 Gratis 1
-                </div>
-              </div>
-              <div className="p-4">
-                <h4 className="font-bold text-slate-900 mb-1">Kopi Senja Kampus</h4>
-                <p className="text-sm text-slate-500 line-clamp-2">Promo happy hour jam 14:00 - 17:00. Tempat nyaman untuk nugas, WiFi kencang.</p>
-              </div>
-            </a>
+              {promos.map((promo) => (
 
-            {/* Ad 4 */}
-            <a href="#" className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-200 group block">
-              <div className="h-40 overflow-hidden relative">
-                <img src="https://th.bing.com/th/id/OIP.cl2oLBaTgOqiWl5zuREkTQHaE8?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3/600/400" alt="Fotokopi" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" referrerPolicy="no-referrer" />
-                <div className="absolute top-3 left-3 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-md shadow-sm">
-                  Cashback 10%
-                </div>
-              </div>
-              <div className="p-4">
-                <h4 className="font-bold text-slate-900 mb-1">Print & Jilid Skripsi</h4>
-                <p className="text-sm text-slate-500 line-clamp-2">Pusat fotokopi dan print warna termurah. Buka 24 jam khusus musim ujian.</p>
-              </div>
-            </a>
+                <a
+                  key={promo.id}
+                  href={promo.link_url}
+                  className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-slate-200 group block"
+                >
+
+                  <div className="h-40 overflow-hidden relative">
+
+                    <img
+                      src={promo.image_url}
+                      alt={promo.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+
+                    <div
+                      className="absolute top-3 left-3 text-white text-xs font-bold px-2 py-1 rounded-md shadow-sm"
+                      style={{
+                        backgroundColor: promo.badge_color
+                      }}
+                    >
+                      {promo.badge_text}
+                    </div>
+
+                  </div>
+
+                  <div className="p-4">
+
+                    <h4 className="font-bold text-slate-900 mb-1">
+                      {promo.title}
+                    </h4>
+
+                    <p className="text-sm text-slate-500 line-clamp-2">
+                      {promo.description}
+                    </p>
+
+                  </div>
+
+                </a>
+
+              ))}
+
+            </div>
           </div>
         </div>
       </section>
